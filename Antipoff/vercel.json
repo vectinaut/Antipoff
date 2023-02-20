@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "cross-env node ./dist/server/server.js"
+    }
+  ]
+}
