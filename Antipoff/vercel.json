@@ -1,14 +1,13 @@
 {
+  "version": 2,
   "builds": [
-    {
-      "src": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-      "use": "@vercel/node"
-    }
+    { "src": "dist/server/**", "use": "@vercel/node" },
+    { "src": "dist/client/**", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "src": "/.*",
-      "dest": "cross-env node ./dist/server/server.js"
-    }
+    { "src": "/(.*)", "dest": "/dist/server/index.js" },
+    { "src": "/static/(.*)", "dest": "/dist/client/static/$1" },
+    { "src": "/favicon.ico", "dest": "/dist/client/favicon.ico" },
+    { "src": "/manifest.json", "dest": "/dist/client/manifest.json" }
   ]
 }
